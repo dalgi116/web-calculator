@@ -4,7 +4,8 @@ app = flask.Flask(__name__)
 @app.route('/', methods=['GET'])
 def index():
     inputText = getData()
-    result = calculate(inputText)
+    filteredData = filterInput(inputText)
+    result = calculate(filteredData)
     return flask.render_template('form.html', result=result)
 
 
@@ -19,7 +20,7 @@ def getData():
         inputText = ''
     return inputText
 
-def calculate(inputText):
+def filterInput(inputText):
     try:
         inputText = inputText.replace(' ', '')
         for splitCharacter in splitCharacters:
@@ -30,14 +31,15 @@ def calculate(inputText):
             if not value[0] in splitCharacters:
                 value = '+' + value
             expandedSplitedText.append(value)
-        
+        return expandedSplitedText
+    except:
+        return inputText
+
+def calculate(expandedSplitedText):
         result = 0
         for value in expandedSplitedText:
             if value[0] == '+':
                 result += float(value[1:])
             elif value[0] == '-':
                 result -= float(value[1:])
-
-        return result
-    except:
-        return inputText
+        return expandedSplitedText
