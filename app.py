@@ -21,6 +21,7 @@ def getData():
 
 def calculate(inputText):
     try:
+        inputText = inputText.replace(' ', '')
         for splitCharacter in splitCharacters:
             inputText = inputText.replace(splitCharacter, ' ' + splitCharacter)
         splitedText = inputText.split()
