@@ -4,14 +4,84 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form</title>
+    <title>Calculator</title>
+    <script>
+        function addCharacter(character) {
+            var data = document.getElementsByName('inputText')[0];
+            data.value = data.value + character;
+        }
+        function removeLast() {
+            var data = document.getElementsByName('inputText')[0];
+            var dataLenght = data.value.length;
+            data.value = data.value.substring(0, dataLenght - 1);
+        }
+    </script>
+    <style>
+        body {
+            text-align: center;
+        }
+        form {
+            width: fit-content;
+            padding: 1em;
+            margin: auto;
+            background-color: bisque;
+        }
+        .btnUpper {
+            width: 2.4em;
+            height: 4em;
+            margin: 0.1em;
+            font-size: larger;
+        }
+        .btnLower {
+            width: 3em;
+            height: 4em;
+            margin: 0.2em;
+            font-size: larger;
+        }
+        input[type = "text"] {
+            text-align: right;
+            font-size: larger;
+            margin: 0.1em;
+            width: 13em;
+            height: 2em;
+        }
+    </style>
 </head>
 <body>
-    <h1>Calculator form</h1>
+    <h1>Calculator</h1>
     <form action="{{ url_for('index') }}" method="get">
-        <input type="text" name="inputText" placeholder="{{ result }}">
-        <input type="submit" value="submit">
-        <input type="reset" value="reset">
+        <div class="inputField">
+            <input type="text" name="inputText" placeholder="{{ result }}">
+        </div>
+        <br>
+        <div class="buttons">
+            <div class="row">
+                <input type="button" class="btnUpper" value="0" onclick="addCharacter('0')">
+                <input type="button" class="btnUpper" value="1" onclick="addCharacter('1')">
+                <input type="button" class="btnUpper" value="2" onclick="addCharacter('2')">
+                <input type="button" class="btnUpper" value="3" onclick="addCharacter('3')">
+                <input type="button" class="btnUpper" value="4" onclick="addCharacter('4')">
+            </div>
+            <div class="row">
+                <input type="button" class="btnUpper" value="5" onclick="addCharacter('5')">
+                <input type="button" class="btnUpper" value="6" onclick="addCharacter('6')">
+                <input type="button" class="btnUpper" value="7" onclick="addCharacter('7')">
+                <input type="button" class="btnUpper" value="8" onclick="addCharacter('8')">
+                <input type="button" class="btnUpper" value="9" onclick="addCharacter('9')">
+            </div>
+            <div class="row">
+                <input type="button" class="btnLower" value="+" onclick="addCharacter('+')">
+                <input type="button" class="btnLower" value="-" onclick="addCharacter('-')">
+                <input type="button" class="btnLower" value="RM"  onclick="removeLast()">
+                <input type="reset"  class="btnLower" value="CE">
+            </div>
+            <div class="row">
+                <input type="button" class="btnLower" value="*" onclick="addCharacter('*')">
+                <input type="button" class="btnLower" value="/" onclick="addCharacter('/')">
+                <input type="button" class="btnLower" value="," onclick="addCharacter('.')">
+                <input type="submit" class="btnLower" value="=">
+            </div>
+        </div>
     </form>
 </body>
 </html>
